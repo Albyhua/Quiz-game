@@ -1,0 +1,38 @@
+header {
+    justify-content: center;
+    display: flex;
+}
+
+
+section {
+    border-radius: 10px;
+    background-color: rgb(25, 116, 48);
+    color: white;
+    display: flex;
+    justify-content: center;
+    height: 50%;
+}
+
+#timer {
+    display: flex;
+    justify-content: end;
+    border-radius: 5px;
+    background-color: beige;
+    color: blue;
+} 
+
+.testbox {
+color: black;
+background-color: blueviolet;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    border: 5px;
+    color: aliceblue;
+    background-color: grey;
+    margin: 10px;
+    
+}
+/* have to mess around to fix this */
