@@ -35,4 +35,8 @@ li {
     margin: 10px;
     
 }
+
+.hidden{
+    display: none;
+}
 /* have to mess around to fix this */
