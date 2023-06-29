@@ -6,37 +6,38 @@ header {
 
 section {
     border-radius: 10px;
-    background-color: rgb(25, 116, 48);
+    background-color: rgb(24, 209, 70);
     color: white;
     display: flex;
-    justify-content: center;
     height: 50%;
+    align-items: center;
+    flex-direction: column;
 }
 
 #timer {
     display: flex;
     justify-content: end;
     border-radius: 5px;
-    background-color: beige;
-    color: blue;
-} 
-
-.testbox {
-color: black;
-background-color: blueviolet;
+    background-color: #D4EAC8;
+    color: black;
+    padding: 10px;
 }
 
 li {
     display: flex;
     justify-content: space-between;
     border: 5px;
-    color: aliceblue;
-    background-color: grey;
+    color: black;
+    background-color: #D4EAC8;
     margin: 10px;
-    
+    margin-right: 45px;
+    padding: 10px;
 }
 
-.hidden{
+.hidden {
     display: none;
 }
-/* have to mess around to fix this */
+
+#timer.hidden {
+    display: none;
+}
