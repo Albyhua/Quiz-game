@@ -1,5 +1,3 @@
-
-
 // amalgamation of gpt/w3schools/own questions
 
 const quizQuestions = [
@@ -47,29 +45,23 @@ const quizQuestions = [
 
 ]
 
-var newScore = "";
-
 
 var play = document.querySelector("#play");
 var timer = document.querySelector("#timer")
-var tryAgain = document.querySelector("#tryAgain") //not used yet
 var choiceEl = document.querySelector("#choices"); //need to string this to options
 var scoreTable = document.querySelector("#scoreTable")
-var quizContainer = document.querySelector("#quizContainer") //not used yet
-// document targets the doc and queryselector targets the element
+var playAgain = document.querySelector("#reset");
 
 var score = 0
 var secondsLeft = 60
 var currentQuestionIndex = 0;
-
-var playAgain = document.querySelector("#reset");
-// playAgain.addEventListener('click', reset);
+var newScore = "";
 
 play.style.visibility = "visible";
 
 
 play.addEventListener('click', startGame);
-// optionEl.addEventListener('click', checkAnswer);
+
 
 function startTimer() {
 
@@ -88,20 +80,18 @@ function startTimer() {
 
 }
 
-
 function startGame() {
 
     displayQuestions(); // displaying the Q
     startTimer();
     document.querySelector("#scoreTable").parentElement.classList.add("hidden");
     play.style.visibility = "hidden"; // this should hide my button afterwards
-
+    document.querySelector("#timer").classList.remove("hidden");
 }
 
 function displayQuestions() {
     var currentQuestion = quizQuestions[currentQuestionIndex]; // grabbing Q from the array
     var questionEl = document.querySelector("#question"); // a way to attach Q to an el
-
     questionEl.textContent = currentQuestion.question; // attaching q to el
     console.log(currentQuestion)
 
@@ -109,7 +99,6 @@ function displayQuestions() {
 
     currentQuestion.choices.forEach((choices, index) => {
         var optionEl = document.createElement('li'); // creating an element
-        // optionEl.classList.add("choices"); // listing those choices onto li
         optionEl.textContent = choices; // allowing the text to appear on li
         choiceEl.appendChild(optionEl); // appending to html
 
@@ -118,12 +107,9 @@ function displayQuestions() {
     console.log(choiceEl)
 }
 
-
 function checkAnswer(event) {
-    var userAnswer = event.target.textContent; // not working
-    // its one big block? wont let me distinguish them 
+    var userAnswer = event.target.textContent;  
     var currentQuestion = quizQuestions[currentQuestionIndex];
-
 
     if (userAnswer === currentQuestion.answers) {
         score++;
@@ -132,7 +118,7 @@ function checkAnswer(event) {
 
     }
     else {
-        secondsLeft -= 100;
+        secondsLeft -= 10;
         window.alert('Incorrect!');
     }
 
@@ -145,16 +131,14 @@ function checkAnswer(event) {
 }
 
 
-
 function endQuiz() {
     document.getElementById('game').classList.add("hidden")
-    document.getElementById('initials').classList.remove("hidden")// this will remove the hidden
-    window.alert('Quiz ended. Your score: ' + score);
+    document.getElementById('initials').classList.remove("hidden")
     document.querySelector("#saveBtn").onclick = saveScore;
-
-
+    document.getElementById('timer').classList.remove("hidden")
+    document.getElementById('reset').classList.remove("hidden")
+    window.alert('Quiz ended. Your score: ' + score);
 }
-
 
 function saveScore() {
     var initials = document.querySelector("input").value.trim();
@@ -175,15 +159,18 @@ function saveScore() {
 
 function displayScores() {
     var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
-    console.log(highScores);
     var scoreTable = document.querySelector("#scoreTable")
+
     scoreTable.innerHTML = '';
 
+    highScores.sort((a, b) => b.score - a.score);
+    
     for (var i = 0; i < highScores.length; i++) {
         var scoreList = document.createElement('li');
         scoreList.textContent = highScores[i].initials + ": " + highScores[i].score; // able to get values from the array stored
         scoreTable.appendChild(scoreList);
     }
+
 }
 
 function reset() {
@@ -191,15 +178,12 @@ function reset() {
     secondsLeft = 60;
     currentQuestionIndex = 0
 
-    document.getElementById('game').classList.remove("hidden")
-    document.getElementById('initials').classList.add("hidden")
-    document.getElementById('initials').classList.remove("hidden");
+    document.getElementById('game').classList.remove("hidden");
+    document.getElementById('initials').classList.add("hidden");
     document.querySelector("#scoreTable").parentElement.classList.add("hidden");
     document.getElementById('reset').classList.add("hidden");
+
     startGame();
-
-
-
 }
 
 playAgain.addEventListener('click', reset);
